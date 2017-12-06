@@ -1,12 +1,12 @@
 FROM java:8
- 
-RUN wget http://mirror.nbtelecom.com.br/apache//jmeter/binaries/apache-jmeter-3.2.tgz
-RUN tar -xvzf apache-jmeter-3.2.tgz
-RUN rm apache-jmeter-3.2.tgz
 
-RUN mv apache-jmeter-3.2 /jmeter
+RUN mkdir /jmeter \
+    && cd /jmeter/ \
+    && wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.3.tgz \
+    && tar -xvzf apache-jmeter-3.3.tgz \
+    && rm apache-jmeter-3.3.tgz
 
-ENV JMETER_HOME /jmeter
+ENV JMETER_HOME /jmeter/apache-jmeter-3.3/
 
 # Add Jmeter to the Path
 ENV PATH $JMETER_HOME/bin:$PATH
