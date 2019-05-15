@@ -12,7 +12,7 @@ for filename in scripts/*.jmx; do
     NAME=$(basename $filename)
     NAME="${NAME%.*}"
     eval "docker cp $filename master:$WDIR/scripts/"
-    eval "docker exec -it master /bin/bash -c 'mkdir $NAME && cd $NAME && ../bin/jmeter -n -t ../$filename -R$SLAVE_IP'"
+    eval "docker exec -it master /bin/bash -c 'mkdir $NAME && cd $NAME && ../bin/jmeter -Jserver.rmi.ssl.disable=true -n -t ../$filename -R$SLAVE_IP'"
     eval "docker cp master:$WDIR/$NAME results/"
 done
 
